@@ -1,6 +1,10 @@
 import re
-import uuid
+import subprocess
 
 def getCurrentMac():
-    macAddress = hex(uuid.getnode()).replace('0x', '')
-    return ':'.join(macAddress[i : i + 2] for i in range(0, 11, 2))
+    output = subprocess.check_output(["ifconfig " + "wlan0"], shell= True)
+    current_mac = re.search(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", str(output))
+    return current_mac.group(0)
+
+def changeCurrentMac(newMac: str):
+    subprocess.call(["ifconfig wlan0 hw ether " + newMac], shell=True)

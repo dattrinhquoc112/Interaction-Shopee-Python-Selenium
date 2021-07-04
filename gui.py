@@ -5,13 +5,14 @@ from interaction import interactionLogin, interactionProduct
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 from seleniumwire import webdriver
-from MacAddress import getCurrentMac
+from MacAddress import changeCurrentMac, getCurrentMac
 
 layout = [
         [sg.Text("USERNAME")],
         [sg.InputText(key="username")],
         [sg.Text("PASSWORD")],
         [sg.InputText(key="password")],
+        [sg.Text("NEW MAC ADDRESS")],
         [sg.InputText(key="MacAddress")],
         [sg.Button(key="changeMacAddress", button_text="Change MAC Address")],
         [sg.FileBrowse(key="filecsv", button_text="Choose file csv")],
@@ -70,5 +71,6 @@ while True:
         # driver.quit()
     if event == "changeMacAddress":
         print(getCurrentMac())
-
+        changeCurrentMac(values["MacAddress"])
+        print(getCurrentMac())
 window.close()

@@ -2,4 +2,3 @@ selenium
 webdriver-manager
 pysimplegui
 selenium-wire
-subprocess
